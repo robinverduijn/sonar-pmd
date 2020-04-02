@@ -24,31 +24,28 @@ import java.lang.reflect.Constructor;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.api.rules.RulePriority.BLOCKER;
-import static org.sonar.api.rules.RulePriority.CRITICAL;
-import static org.sonar.api.rules.RulePriority.INFO;
-import static org.sonar.api.rules.RulePriority.MAJOR;
-import static org.sonar.api.rules.RulePriority.MINOR;
 
 class PmdLevelUtilsTest {
+    @SuppressWarnings("deprecation")
     @Test
     void should_get_priority_from_level() {
-        assertThat(PmdLevelUtils.fromLevel(1)).isSameAs(BLOCKER);
-        assertThat(PmdLevelUtils.fromLevel(2)).isSameAs(CRITICAL);
-        assertThat(PmdLevelUtils.fromLevel(3)).isSameAs(MAJOR);
-        assertThat(PmdLevelUtils.fromLevel(4)).isSameAs(MINOR);
-        assertThat(PmdLevelUtils.fromLevel(5)).isSameAs(INFO);
+        assertThat(PmdLevelUtils.fromLevel(1)).isSameAs(org.sonar.api.rules.RulePriority.BLOCKER);
+        assertThat(PmdLevelUtils.fromLevel(2)).isSameAs(org.sonar.api.rules.RulePriority.CRITICAL);
+        assertThat(PmdLevelUtils.fromLevel(3)).isSameAs(org.sonar.api.rules.RulePriority.MAJOR);
+        assertThat(PmdLevelUtils.fromLevel(4)).isSameAs(org.sonar.api.rules.RulePriority.MINOR);
+        assertThat(PmdLevelUtils.fromLevel(5)).isSameAs(org.sonar.api.rules.RulePriority.INFO);
         assertThat(PmdLevelUtils.fromLevel(-1)).isNull();
         assertThat(PmdLevelUtils.fromLevel(null)).isNull();
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void should_get_level_from_priority() {
-        assertThat(PmdLevelUtils.toLevel(BLOCKER)).isEqualTo(1);
-        assertThat(PmdLevelUtils.toLevel(CRITICAL)).isEqualTo(2);
-        assertThat(PmdLevelUtils.toLevel(MAJOR)).isEqualTo(3);
-        assertThat(PmdLevelUtils.toLevel(MINOR)).isEqualTo(4);
-        assertThat(PmdLevelUtils.toLevel(INFO)).isEqualTo(5);
+        assertThat(PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.BLOCKER)).isEqualTo(1);
+        assertThat(PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.CRITICAL)).isEqualTo(2);
+        assertThat(PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.MAJOR)).isEqualTo(3);
+        assertThat(PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.MINOR)).isEqualTo(4);
+        assertThat(PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.INFO)).isEqualTo(5);
     }
 
     @Test

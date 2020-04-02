@@ -29,7 +29,6 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.pmd.PmdTestUtils;
@@ -54,7 +53,9 @@ class PmdProfileImporterTest {
             RuleQuery query = (RuleQuery) invocation.getArguments()[0];
             String configKey = query.getConfigKey();
             String key = configKey.substring(configKey.lastIndexOf('/') + 1);
-            Rule rule = Rule.create(query.getRepositoryKey(), key, "").setConfigKey(configKey).setSeverity(RulePriority.BLOCKER);
+
+            @SuppressWarnings("deprecation")
+            Rule rule = Rule.create(query.getRepositoryKey(), key, "").setConfigKey(configKey).setSeverity(org.sonar.api.rules.RulePriority.BLOCKER);
             if (rule.getConfigKey().equals("rulesets/java/coupling.xml/ExcessiveImports")) {
                 rule.createParameter("minimum");
             }
@@ -101,6 +102,7 @@ class PmdProfileImporterTest {
         assertThat(activeRule.getParameter("minimum")).isEqualTo("30");
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void should_import_default_priority() {
         Reader reader = read("/org/sonar/plugins/pmd/simple.xml");
@@ -108,9 +110,10 @@ class PmdProfileImporterTest {
         RulesProfile profile = importer.importProfile(reader, messages);
         ActiveRule activeRule = profile.getActiveRuleByConfigKey("pmd", "rulesets/java/coupling.xml/ExcessiveImports");
 
-        assertThat(activeRule.getSeverity()).isSameAs(RulePriority.BLOCKER);
+        assertThat(activeRule.getSeverity()).isSameAs(org.sonar.api.rules.RulePriority.BLOCKER);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void should_import_priority() {
         Reader reader = read("/org/sonar/plugins/pmd/simple.xml");
@@ -118,10 +121,10 @@ class PmdProfileImporterTest {
         RulesProfile profile = importer.importProfile(reader, messages);
 
         ActiveRule activeRule = profile.getActiveRuleByConfigKey("pmd", "rulesets/java/design.xml/UseNotifyAllInsteadOfNotify");
-        assertThat(activeRule.getSeverity()).isSameAs(RulePriority.MINOR);
+        assertThat(activeRule.getSeverity()).isSameAs(org.sonar.api.rules.RulePriority.MINOR);
 
         activeRule = profile.getActiveRuleByConfigKey("pmd", "rulesets/java/coupling.xml/CouplingBetweenObjects");
-        assertThat(activeRule.getSeverity()).isSameAs(RulePriority.CRITICAL);
+        assertThat(activeRule.getSeverity()).isSameAs(org.sonar.api.rules.RulePriority.CRITICAL);
     }
 
     @Test

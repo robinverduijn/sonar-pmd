@@ -26,7 +26,6 @@ import java.util.Map;
 
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.rules.RulePriority;
 import org.sonar.plugins.pmd.PmdLevelUtils;
 import org.sonar.plugins.pmd.xml.PmdProperty;
 import org.sonar.plugins.pmd.xml.PmdRule;
@@ -54,7 +53,9 @@ public class ActiveRulesRuleSetFactory implements RuleSetFactory {
         ruleset.setDescription(String.format("Sonar Profile: %s", repositoryKey));
         for (ActiveRule rule : rules) {
             String configKey = rule.internalKey();
-            PmdRule pmdRule = new PmdRule(configKey, PmdLevelUtils.toLevel(RulePriority.valueOfString(rule.severity())));
+
+            @SuppressWarnings("deprecation")
+            PmdRule pmdRule = new PmdRule(configKey, PmdLevelUtils.toLevel(org.sonar.api.rules.RulePriority.valueOfString(rule.severity())));
             addRuleProperties(rule, pmdRule);
             ruleset.addRule(pmdRule);
 

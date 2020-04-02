@@ -22,16 +22,16 @@ package org.sonar.plugins.pmd;
 import java.util.Objects;
 import javax.annotation.Nullable;
 
-import org.sonar.api.rules.RulePriority;
-
 public final class PmdLevelUtils {
 
-    private static final int INDEX_LEVEL = RulePriority.values().length;
+    @SuppressWarnings("deprecation")
+    private static final int INDEX_LEVEL = org.sonar.api.rules.RulePriority.values().length;
     private PmdLevelUtils() {
         // only static methods
     }
 
-    public static RulePriority fromLevel(@Nullable Integer level) {
+    @SuppressWarnings("deprecation")
+    public static org.sonar.api.rules.RulePriority fromLevel(@Nullable Integer level) {
 
         if (Objects.isNull(level)) {
             return null;
@@ -39,10 +39,11 @@ public final class PmdLevelUtils {
 
         final int index = Math.abs(INDEX_LEVEL - level);
 
-        return (index < INDEX_LEVEL) ? RulePriority.valueOfInt(index) : null;
+        return (index < INDEX_LEVEL) ? org.sonar.api.rules.RulePriority.valueOfInt(index) : null;
     }
 
-    public static Integer toLevel(RulePriority priority) {
+    @SuppressWarnings("deprecation")
+    public static Integer toLevel(org.sonar.api.rules.RulePriority priority) {
         return Math.abs(priority.ordinal() - INDEX_LEVEL);
     }
 }
