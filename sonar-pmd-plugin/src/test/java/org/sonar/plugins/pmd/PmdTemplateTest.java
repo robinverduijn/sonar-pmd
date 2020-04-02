@@ -32,7 +32,6 @@ import net.sourceforge.pmd.PMDException;
 import net.sourceforge.pmd.RuleContext;
 import net.sourceforge.pmd.RuleSets;
 import net.sourceforge.pmd.SourceCodeProcessor;
-import net.sourceforge.pmd.lang.java.JavaLanguageHandler;
 import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.batch.fs.InputFile;
@@ -84,59 +83,70 @@ class PmdTemplateTest {
         new PmdTemplate(configuration, processor).process(inputFile, rulesets, ruleContext);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java12_version() {
-        assertThat(PmdTemplate.languageVersion("1.2").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("1.2").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java5_version() {
-        assertThat(PmdTemplate.languageVersion("5").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("5").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java6_version() {
-        assertThat(PmdTemplate.languageVersion("6").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("6").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java7_version() {
-        assertThat(PmdTemplate.languageVersion("7").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("7").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java8_version() {
-        assertThat(PmdTemplate.languageVersion("8").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("8").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java9_version() {
-        assertThat(PmdTemplate.languageVersion("9").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("9").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java9_version_with_outdated_versioning_scheme() {
-        assertThat(PmdTemplate.languageVersion("1.9").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("1.9").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java10_version() {
-        assertThat(PmdTemplate.languageVersion("10").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("10").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java10_version_with_outdated_versioning_scheme() {
-        assertThat(PmdTemplate.languageVersion("1.10").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("1.10").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java11_version() {
-        assertThat(PmdTemplate.languageVersion("11").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("11").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void java11_version_with_outdated_versioning_scheme() {
-        assertThat(PmdTemplate.languageVersion("1.11").getLanguageVersionHandler()).isInstanceOf(JavaLanguageHandler.class);
+        assertThat(PmdTemplate.languageVersion("1.11").getLanguageVersionHandler()).isInstanceOf(net.sourceforge.pmd.lang.java.JavaLanguageHandler.class);
     }
 
     @Test
