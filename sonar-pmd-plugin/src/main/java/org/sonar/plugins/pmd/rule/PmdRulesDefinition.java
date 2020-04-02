@@ -29,7 +29,6 @@ import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.pmd.PmdConstants;
-import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 public final class PmdRulesDefinition implements RulesDefinition {
 
@@ -53,7 +52,12 @@ public final class PmdRulesDefinition implements RulesDefinition {
 
         ExternalDescriptionLoader.loadHtmlDescriptions(repository, htmlDescriptionFolder);
         loadNames(repository);
-        SqaleXmlLoader.load(repository, "/com/sonar/sqale/pmd-model.xml");
+        loadSqaleRepository(repository);
+    }
+
+    @SuppressWarnings("deprecation")
+    private static void loadSqaleRepository(NewRepository repository) {
+        org.sonar.squidbridge.rules.SqaleXmlLoader.load(repository, "/com/sonar/sqale/pmd-model.xml");
     }
 
     @Override
