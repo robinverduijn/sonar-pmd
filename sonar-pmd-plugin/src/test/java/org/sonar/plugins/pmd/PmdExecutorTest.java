@@ -113,11 +113,16 @@ class PmdExecutorTest {
         verify(pmdConfiguration).dumpXmlReport(report);
 
         // setting java source version to the default value
-        settings.removeProperty(PmdConstants.JAVA_SOURCE_VERSION);
+        removeProperty(PmdConstants.JAVA_SOURCE_VERSION);
         report = pmdExecutor.execute();
 
         assertThat(report).isNotNull();
         verify(pmdConfiguration).dumpXmlReport(report);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void removeProperty(String property) {
+        settings.removeProperty(property);
     }
 
     @Test
