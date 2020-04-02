@@ -46,6 +46,8 @@ class PmdPluginTest {
         final Plugin.Context context = new Plugin.Context(runtime);
 
         subject.define(context);
+
+        @SuppressWarnings("rawtypes")
         final List extensions = context.getExtensions();
         assertThat(extensions).hasSize(9);
         assertThat(extensions).contains(
